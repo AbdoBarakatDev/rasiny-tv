@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:tvs_movies_app/core/network/api_constants.dart';
-import 'package:tvs_movies_app/core/shared/entities/generes.dart';
 import 'package:tvs_movies_app/core/shared/entities/recommendations.dart';
 import 'package:tvs_movies_app/movies/presentation/screens/dummy.dart';
 import 'package:tvs_movies_app/tvs/domain/entities/tv_details.dart';
@@ -47,6 +46,7 @@ class TvDetailContent extends StatelessWidget {
     required this.tvs,
     required this.recommendations,
   }) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -220,7 +220,7 @@ class TvDetailContent extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Tab(text: 'More like this'.toUpperCase()),
+                  // Tab(text: 'More like this'.toUpperCase()),
                   SliverPadding(
                     padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 24.0),
                     sliver: _showRecommendations(),

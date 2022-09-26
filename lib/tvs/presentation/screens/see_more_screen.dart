@@ -4,24 +4,25 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:tvs_movies_app/core/network/api_constants.dart';
 import 'package:tvs_movies_app/core/services/services_locator.dart';
-import 'package:tvs_movies_app/movies/domain/entities/movie.dart';
-import 'package:tvs_movies_app/movies/presentation/controller/movies_bloc.dart';
-import 'package:tvs_movies_app/movies/presentation/controller/movies_event.dart';
-import 'package:tvs_movies_app/movies/presentation/controller/movies_states.dart';
-import 'package:tvs_movies_app/movies/presentation/screens/movie_detail_screen.dart';
+import 'package:tvs_movies_app/tvs/domain/entities/tv.dart';
+import 'package:tvs_movies_app/tvs/presentation/controller/tv_bloc.dart';
+import 'package:tvs_movies_app/tvs/presentation/controller/tv_event.dart';
+import 'package:tvs_movies_app/tvs/presentation/controller/tv_state.dart';
+import 'package:tvs_movies_app/tvs/presentation/screens/tv_detail_screen.dart';
 import 'package:tvs_movies_app/utils/enums.dart';
 
-class SeeMoreTvScreen extends StatelessWidget {
+class SeeMoreMoviesScreen extends StatelessWidget {
   final bool isTopRated;
 
-  const SeeMoreTvScreen({Key? key, required this.isTopRated}) : super(key: key);
+  const SeeMoreMoviesScreen({Key? key, required this.isTopRated})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => sl<MoviesBloc>()
-        ..add(GetTopRatedMoviesEvent())
-        ..add(GetPopularMoviesEvent()),
+      create: (context) => sl<TvBloc>()
+        ..add(GetTopRatedTvEvent())
+        ..add(GetPopularTvEvent()),
       child: Scaffold(
         backgroundColor: Colors.black45,
         body: buildSeeMore(isTopRated: isTopRated),
@@ -30,10 +31,10 @@ class SeeMoreTvScreen extends StatelessWidget {
   }
 
   buildSeeMore({required bool isTopRated}) {
-    return BlocBuilder<MoviesBloc, MoviesStates>(
+    return BlocBuilder<TvBloc, TvsStates>(
       builder: (context, state) {
         if (isTopRated) {
-          switch (state.topRatedMoviesStates) {
+          switch (state.topRatedTvsStates) {
             case RequestStates.loading:
               return buildLoadingIndicator();
             case RequestStates.loaded:
@@ -43,7 +44,7 @@ class SeeMoreTvScreen extends StatelessWidget {
               return buildErrorView();
           }
         } else {
-          switch (state.popularMoviesStates) {
+          switch (state.popularTvsStates) {
             case RequestStates.loading:
               return buildLoadingIndicator();
             case RequestStates.loaded:
@@ -56,7 +57,7 @@ class SeeMoreTvScreen extends StatelessWidget {
     );
   }
 
-  buildSeeMoreImage(Movie movie) {
+  buildSeeMoreImage(Tv tv) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
@@ -67,7 +68,7 @@ class SeeMoreTvScreen extends StatelessWidget {
           width: 120.0,
           height: 150,
           fit: BoxFit.cover,
-          imageUrl: ApiConstants.imageUrl(movie.backdropPath),
+          imageUrl: ApiConstants.imageUrl(tv.backdropPath),
           placeholder: (context, url) => Shimmer.fromColors(
             baseColor: Colors.grey[850]!,
             highlightColor: Colors.grey[800]!,
@@ -86,11 +87,11 @@ class SeeMoreTvScreen extends StatelessWidget {
     );
   }
 
-  buildSeeMoreDetails(Movie movie) {
+  buildSeeMoreDetails(Tv tv) {
     return Expanded(
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Text(
-        movie.title,
+        tv.originalName,
         maxLines: 2,
         style: const TextStyle(color: Colors.white, fontSize: 20),
       ),
@@ -104,7 +105,7 @@ class SeeMoreTvScreen extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 5),
               child: Text(
-                movie.releaseDate,
+                tv.releaseDate,
                 style: const TextStyle(color: Colors.white, fontSize: 13),
               ),
             ),
@@ -117,7 +118,7 @@ class SeeMoreTvScreen extends StatelessWidget {
             color: Colors.yellow,
           ),
           Text(
-            movie.voteAverage.toString(),
+            tv.voteAverage.toString(),
             style: const TextStyle(color: Colors.white, fontSize: 12),
           ),
         ],
@@ -126,14 +127,14 @@ class SeeMoreTvScreen extends StatelessWidget {
         height: 5,
       ),
       Text(
-        movie.overview,
+        tv.overview,
         maxLines: 4,
         style: const TextStyle(color: Colors.white, fontSize: 13),
       ),
     ]));
   }
 
-  buildListItems({required bool isTopRated, required MoviesStates state}) {
+  buildListItems({required bool isTopRated, required TvsStates state}) {
     return ListView.builder(
       itemBuilder: (context, index) {
         return Padding(
@@ -142,10 +143,10 @@ class SeeMoreTvScreen extends StatelessWidget {
             onTap: () {
               /// todo: NavigateToMovieDetails
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return MovieDetailScreen(
+                return TvDetailScreen(
                     id: isTopRated
-                        ? state.topRatedMovies[index].id
-                        : state.popularMovies[index].id);
+                        ? state.topRatedTvs[index].id
+                        : state.popularTvs[index].id);
               }));
             },
             child: Card(
@@ -155,14 +156,14 @@ class SeeMoreTvScreen extends StatelessWidget {
                 child: Row(
                   children: [
                     isTopRated
-                        ? buildSeeMoreImage(state.topRatedMovies[index])
-                        : buildSeeMoreImage(state.popularMovies[index]),
+                        ? buildSeeMoreImage(state.topRatedTvs[index])
+                        : buildSeeMoreImage(state.popularTvs[index]),
                     const SizedBox(
                       width: 10,
                     ),
                     isTopRated
-                        ? buildSeeMoreDetails(state.topRatedMovies[index])
-                        : buildSeeMoreDetails(state.popularMovies[index]),
+                        ? buildSeeMoreDetails(state.topRatedTvs[index])
+                        : buildSeeMoreDetails(state.popularTvs[index]),
                   ],
                 ),
               ),
@@ -171,7 +172,7 @@ class SeeMoreTvScreen extends StatelessWidget {
         );
       },
       itemCount:
-          isTopRated ? state.topRatedMovies.length : state.popularMovies.length,
+          isTopRated ? state.topRatedTvs.length : state.popularTvs.length,
     );
   }
 

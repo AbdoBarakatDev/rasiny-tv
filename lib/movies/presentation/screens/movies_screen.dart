@@ -7,7 +7,7 @@ import 'package:tvs_movies_app/movies/presentation/components/popular_component.
 import 'package:tvs_movies_app/movies/presentation/components/top_rated_component.dart';
 import 'package:tvs_movies_app/movies/presentation/controller/movies_bloc.dart';
 import 'package:tvs_movies_app/movies/presentation/controller/movies_event.dart';
-import 'package:tvs_movies_app/movies/presentation/screens/see_more_screen.dart';
+import 'package:tvs_movies_app/tvs/presentation/screens/see_more_screen.dart';
 import 'package:tvs_movies_app/utils/app_strings.dart';
 
 class MoviesScreen extends StatelessWidget {
@@ -49,7 +49,7 @@ class MoviesScreen extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                               builder: (context) =>
-                                  const SeeMoreScreen(isTopRated: false),
+                                  const SeeMoreMoviesScreen(isTopRated: false),
                             ));
                       },
                       child: Padding(
@@ -99,7 +99,7 @@ class MoviesScreen extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                               builder: (context) =>
-                                  const SeeMoreScreen(isTopRated: true),
+                                  const SeeMoreMoviesScreen(isTopRated: true),
                             ));
                       },
                       child: Padding(

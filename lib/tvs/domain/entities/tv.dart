@@ -10,17 +10,20 @@ class Tv extends Equatable {
   final String overview;
   final int numberOfEpisodes;
   final int numberOfSeasons;
+  final String releaseDate;
 
-  const Tv(
-      {required this.backdropPath,
-      required this.id,
-      required this.type,
-      required this.voteAverage,
-      required this.posterPath,
-      required this.originalName,
-      required this.overview,
-      required this.numberOfEpisodes,
-      required this.numberOfSeasons});
+  const Tv({
+    required this.backdropPath,
+    required this.id,
+    required this.type,
+    required this.voteAverage,
+    required this.posterPath,
+    required this.originalName,
+    required this.overview,
+    required this.numberOfEpisodes,
+    required this.numberOfSeasons,
+    required this.releaseDate,
+  });
 
   @override
   // TODO: implement props
@@ -33,6 +36,7 @@ class Tv extends Equatable {
         originalName,
         overview,
         numberOfEpisodes,
-        numberOfSeasons
+        numberOfSeasons,
+        releaseDate
       ];
 }
