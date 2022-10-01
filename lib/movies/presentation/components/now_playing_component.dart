@@ -3,10 +3,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tvs_movies_app/core/localization/app_localization.dart';
 import 'package:tvs_movies_app/core/network/api_constants.dart';
 import 'package:tvs_movies_app/movies/presentation/controller/movies_bloc.dart';
 import 'package:tvs_movies_app/movies/presentation/controller/movies_states.dart';
 import 'package:tvs_movies_app/movies/presentation/screens/movie_detail_screen.dart';
+import 'package:tvs_movies_app/utils/app_strings.dart';
 import 'package:tvs_movies_app/utils/enums.dart';
 
 class NowPlayingComponent extends StatelessWidget {
@@ -102,7 +104,10 @@ class NowPlayingComponent extends StatelessWidget {
                                         ),
                                         const SizedBox(width: 4.0),
                                         Text(
-                                          'Now Playing'.toUpperCase(),
+                                          AppLocalization.of(context)!
+                                              .translate(AppStrings.nowPlaying)
+                                              .toString()
+                                              .toUpperCase(),
                                           style: const TextStyle(
                                               fontSize: 16.0,
                                               color: Colors.white),

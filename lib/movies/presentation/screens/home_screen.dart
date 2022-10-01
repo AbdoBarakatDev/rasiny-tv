@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:tvs_movies_app/core/localization/app_localization.dart';
 import 'package:tvs_movies_app/core/shared/functions.dart';
 import 'package:tvs_movies_app/movies/presentation/screens/movies_screen.dart';
 import 'package:tvs_movies_app/tvs/presentation/screens/tvs_screen.dart';
+import 'package:tvs_movies_app/utils/app_strings.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -38,9 +40,11 @@ class HomeScreen extends StatelessWidget {
         ),
         Container(
             color: Colors.grey.shade300.withOpacity(0.3),
-            child: const Text(
-              "Movies",
-              style: TextStyle(color: Colors.white, fontSize: 40),
+            child: Text(
+              AppLocalization.of(context)!
+                  .translate(AppStrings.moviesPart)
+                  .toString(),
+              style: const TextStyle(color: Colors.white, fontSize: 40),
             )),
       ]),
     );
@@ -85,9 +89,11 @@ class HomeScreen extends StatelessWidget {
           ),
           Container(
               color: Colors.grey.shade300.withOpacity(0.3),
-              child: const Text(
-                "TV",
-                style: TextStyle(color: Colors.white, fontSize: 40),
+              child: Text(
+                AppLocalization.of(context)!
+                    .translate(AppStrings.tvsPart)
+                    .toString(),
+                style: const TextStyle(color: Colors.white, fontSize: 40),
               )),
         ],
       ),

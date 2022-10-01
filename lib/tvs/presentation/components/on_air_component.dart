@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tvs_movies_app/core/localization/app_localization.dart';
 import 'package:tvs_movies_app/core/network/api_constants.dart';
 import 'package:tvs_movies_app/tvs/presentation/controller/tv_bloc.dart';
 import 'package:tvs_movies_app/tvs/presentation/controller/tv_state.dart';
@@ -102,7 +103,10 @@ class OnAirComponent extends StatelessWidget {
                                         ),
                                         const SizedBox(width: 4.0),
                                         Text(
-                                          AppStrings.onAir.toUpperCase(),
+                                          AppLocalization.of(context)!
+                                              .translate(AppStrings.onAir)
+                                              .toString()
+                                              .toUpperCase(),
                                           style: const TextStyle(
                                               fontSize: 16.0,
                                               color: Colors.white),

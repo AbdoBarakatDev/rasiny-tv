@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:tvs_movies_app/core/localization/app_localization.dart';
 import 'package:tvs_movies_app/core/network/api_constants.dart';
 import 'package:tvs_movies_app/core/shared/entities/recommendations.dart';
 import 'package:tvs_movies_app/movies/presentation/screens/dummy.dart';
@@ -46,7 +47,6 @@ class TvDetailContent extends StatelessWidget {
     required this.tvs,
     required this.recommendations,
   }) : super(key: key);
-
 
   @override
   Widget build(BuildContext context) {
@@ -190,7 +190,7 @@ class TvDetailContent extends StatelessWidget {
                             ),
                             const SizedBox(height: 8.0),
                             Text(
-                              '${AppStrings.type}${state.tvDetails!.type}',
+                              '${AppLocalization.of(context)!.translate(AppStrings.type).toString()}${state.tvDetails!.type}',
                               style: const TextStyle(
                                 color: Colors.white70,
                                 fontSize: 12.0,
@@ -210,7 +210,10 @@ class TvDetailContent extends StatelessWidget {
                         from: 20,
                         duration: const Duration(milliseconds: 500),
                         child: Text(
-                          AppStrings.moreLikeThis.toUpperCase(),
+                          AppLocalization.of(context)!
+                              .translate(AppStrings.moreLikeThis)
+                              .toString()
+                              .toUpperCase(),
                           style: const TextStyle(
                             fontSize: 16.0,
                             fontWeight: FontWeight.w500,
@@ -230,8 +233,10 @@ class TvDetailContent extends StatelessWidget {
             );
 
           case RequestStates.error:
-            return const Center(
-              child: Text(AppStrings.error),
+            return Center(
+              child: Text(AppLocalization.of(context)!
+                  .translate(AppStrings.error)
+                  .toString()),
             );
         }
       },
@@ -324,8 +329,10 @@ class TvDetailContent extends StatelessWidget {
               ),
             );
           case RequestStates.error:
-            return const Center(
-              child: Text(AppStrings.error),
+            return Center(
+              child: Text(AppLocalization.of(context)!
+                  .translate(AppStrings.error)
+                  .toString()),
             );
         }
       },

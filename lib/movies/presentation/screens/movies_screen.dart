@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tvs_movies_app/core/localization/app_localization.dart';
 import 'package:tvs_movies_app/core/services/services_locator.dart';
 import 'package:tvs_movies_app/movies/presentation/components/now_playing_component.dart';
 import 'package:tvs_movies_app/movies/presentation/components/popular_component.dart';
@@ -34,7 +35,8 @@ class MoviesScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      AppStrings.popular,
+                      AppLocalization.of(context)!
+                          .translate(AppStrings.popular).toString(),
                       style: GoogleFonts.poppins(
                         fontSize: 19,
                         color: Colors.white,
@@ -55,12 +57,12 @@ class MoviesScreen extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
-                          children: const [
+                          children:[
                             Text(
-                              AppStrings.seeMore,
-                              style: TextStyle(color: Colors.white),
+                              AppLocalization.of(context)!.translate(AppStrings.seeMore).toString(),
+                              style: const TextStyle(color: Colors.white),
                             ),
-                            Icon(
+                            const Icon(
                               Icons.arrow_forward_ios,
                               size: 16.0,
                               color: Colors.white,
@@ -84,7 +86,7 @@ class MoviesScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      AppStrings.topRated,
+                      AppLocalization.of(context)!.translate(AppStrings.topRated).toString(),
                       style: GoogleFonts.poppins(
                         fontSize: 19,
                         fontWeight: FontWeight.w500,
@@ -105,14 +107,14 @@ class MoviesScreen extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
-                          children: const [
+                          children:  [
                             Text(
-                              AppStrings.seeMore,
-                              style: TextStyle(
+                              AppLocalization.of(context)!.translate(AppStrings.seeMore).toString(),
+                              style: const TextStyle(
                                 color: Colors.white,
                               ),
                             ),
-                            Icon(
+                            const Icon(
                               Icons.arrow_forward_ios,
                               size: 16.0,
                               color: Colors.white,
