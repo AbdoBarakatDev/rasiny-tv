@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/date_symbol_data_file.dart';
 import 'package:tvs_movies_app/core/localization/app_localization.dart';
 import 'package:tvs_movies_app/core/services/services_locator.dart';
 import 'package:tvs_movies_app/movies/presentation/screens/home_screen.dart';
